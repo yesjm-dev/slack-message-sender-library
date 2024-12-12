@@ -6,17 +6,17 @@ import com.slack.api.model.block.element.ButtonElement;
 
 public class ButtonBlock {
     private final String buttonUrl;
-    private final String buttonName;
+    private final String buttonText;
 
-    public ButtonBlock(String buttonUrl, String buttonName) {
+    public ButtonBlock(String buttonUrl, String buttonText) {
         this.buttonUrl = buttonUrl;
-        this.buttonName = buttonName;
+        this.buttonText = buttonText;
     }
 
     public ButtonElement toButtonElement() {
         return BlockElements.button(i -> i
                 .url(buttonUrl)
-                .text(BlockCompositions.plainText(buttonName))
+                .text(BlockCompositions.plainText(buttonText))
                 .actionId("button"));
     }
 }
