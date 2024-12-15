@@ -8,7 +8,13 @@ public class ImageBlock {
     private final String altText;
 
     public ImageBlock(String imageUrl, String altText) {
+        if (imageUrl == null) {
+            throw new IllegalArgumentException("imageUrl cannot be null");
+        }
         this.imageUrl = imageUrl;
+        if (altText == null) {
+            throw new IllegalArgumentException("altText cannot be null");
+        }
         this.altText = altText;
     }
 

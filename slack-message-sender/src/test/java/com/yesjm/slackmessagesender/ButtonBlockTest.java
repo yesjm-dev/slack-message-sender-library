@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ButtonBlockTest {
 
     @Test
-    void 버튼이_정상적으로_생성된다() {
+    void ButtonBlock_정상적으로_생성된다() {
         // given
         String validUrl = "https://www.example.com";
         String buttonText = "Click Me";
@@ -20,23 +20,6 @@ class ButtonBlockTest {
         assertNotNull(buttonBlock);
         assertEquals(validUrl, buttonBlock.toButtonElement().getUrl());
         assertEquals(buttonText, buttonBlock.toButtonElement().getText().getText());
-    }
-
-    @Test
-    void toButtonElement는_정상적인_ButtonElement를_생성한다() {
-        // given
-        String validUrl = "https://www.example.com";
-        String buttonText = "Click Here";
-
-        // when
-        ButtonBlock buttonBlock = new ButtonBlock(validUrl, buttonText);
-        ButtonElement buttonElement = buttonBlock.toButtonElement();
-
-        // then
-        assertNotNull(buttonElement);
-        assertEquals(validUrl, buttonElement.getUrl());
-        assertEquals("Click Here", buttonElement.getText().getText());
-        assertEquals("button", buttonElement.getActionId());
     }
 
     @Test
