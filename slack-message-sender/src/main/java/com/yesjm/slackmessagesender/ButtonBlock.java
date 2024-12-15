@@ -15,6 +15,9 @@ public class ButtonBlock {
             throw new IllegalArgumentException("Invalid URL provided: " + buttonUrl);
         }
         this.buttonUrl = buttonUrl;
+        if (buttonText == null) {
+            throw new IllegalArgumentException("buttonText cannot be null");
+        }
         this.buttonText = buttonText;
     }
 
