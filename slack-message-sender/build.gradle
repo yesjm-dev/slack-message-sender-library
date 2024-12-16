@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'org.icd'
+group 'com.yesjm'
 version '1.0-SNAPSHOT'
 description = 'A lightweight Slack message sender library'
 
