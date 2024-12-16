@@ -8,8 +8,6 @@ version '0.0.1'
 description = 'A lightweight Slack message sender library'
 
 java {
-    withJavadocJar()
-    withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
@@ -41,12 +39,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId = 'com.yesjm'
-            artifactId = 'slack-message-sender'
+            artifactId = 'slack-message-sender-library'
             version = '0.0.1'
             from components.java
-
-            artifact tasks.javadocJar
-            artifact tasks.sourcesJar
         }
     }
 }
