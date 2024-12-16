@@ -33,3 +33,14 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.yesjm'
+            artifactId = 'slack-message-sender-library'
+            version = '0.0.2'
+            from components.java
+        }
+    }
+}
