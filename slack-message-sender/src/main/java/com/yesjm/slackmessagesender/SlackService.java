@@ -7,7 +7,11 @@ import java.io.IOException;
 
 public class SlackService {
 
-    private final Slack slack = Slack.getInstance();
+    private final Slack slack;
+
+    public SlackService(Slack slack) {
+        this.slack = slack;
+    }
 
     /**
      * Sends a message to Slack using the provided webhook URL and payload.
