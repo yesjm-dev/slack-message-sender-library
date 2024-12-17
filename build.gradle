@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-//    id 'maven-publish'
+    id 'maven-publish'
 }
+
 group = 'com.yesjm'
 version = '0.0.1'
 description = 'A lightweight Slack message sender library'
