@@ -2,7 +2,8 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
-
+group = 'com.yesjm'
+version = '0.0.1'
 description = 'A lightweight Slack message sender library'
 
 repositories {
@@ -37,10 +38,6 @@ test {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.yesjm.slackmessagesender'
-            artifactId = 'slack-message-sender-library'
-            version = '0.0.1'
-
             from components.java
         }
     }
