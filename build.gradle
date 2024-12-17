@@ -37,9 +37,10 @@ test {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.yesjm'
+            groupId = 'com.yesjm.slackmessagesender'
             artifactId = 'slack-message-sender-library'
             version = '0.0.1'
+
             from components.java
         }
     }
