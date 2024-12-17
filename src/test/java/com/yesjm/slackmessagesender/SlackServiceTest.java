@@ -3,6 +3,7 @@ package com.yesjm.slackmessagesender;
 import com.slack.api.Slack;
 import com.slack.api.webhook.Payload;
 import com.slack.api.webhook.WebhookResponse;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -16,7 +17,12 @@ public class SlackServiceTest {
 
     private final Slack slack = mock(Slack.class);
     private final WebhookResponse webhookResponse = mock(WebhookResponse.class);
-    private final SlackService slackService = new SlackService(slack);
+    private SlackService slackService;
+
+    @BeforeEach
+    public void setUp() {
+        slackService = new SlackService(slack);
+    }
 
     @Test
     void 슬랙메시지_전송_성공() throws Exception {

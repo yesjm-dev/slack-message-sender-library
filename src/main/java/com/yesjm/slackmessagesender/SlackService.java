@@ -13,10 +13,14 @@ public class SlackService {
         this.slack = slack;
     }
 
+    public SlackService() {
+        this.slack = Slack.getInstance();
+    }
+
     /**
      * Sends a message to Slack using the provided webhook URL and payload.
      *
-     * @param url The Slack webhook URL.
+     * @param url     The Slack webhook URL.
      * @param payload The payload containing the message to send.
      */
     public void sendSlackMessage(String url, Payload payload) {
