@@ -33,8 +33,5 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: Run Tests with Jacoco
-        run: ./gradlew clean test jacocoTestReport
-
-      - name: Run tests and check coverage
-        run: ./gradlew test jacocoTestReport jacocoTestCoverageVerification
+      - name: Run Tests with Jacoco and Coverage Verification
+        run: ./gradlew clean test jacocoTestReport jacocoTestCoverageVerification
