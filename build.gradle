@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'jacoco'
 }
 
 group = 'com.yesjm'
@@ -21,6 +22,10 @@ java {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.12"
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
@@ -34,7 +39,29 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
+
+jacocoTestReport {
+    dependsOn(test)
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.6 // 최소 60% 커버리지 설정
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
 
 publishing {
     publications {
