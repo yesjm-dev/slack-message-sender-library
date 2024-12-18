@@ -36,8 +36,5 @@ jobs:
       - name: Run Tests with Jacoco
         run: ./gradlew clean test jacocoTestReport
 
-      - name: Post coverage report
-        uses: dorny/test-report@v1
-        with:
-          path: build/reports/jacoco/test/jacocoTestReport.xml
-          config: .github/coverage-comment-config.yml
+      - name: Run tests and check coverage
+        run: ./gradlew test jacocoTestReport jacocoTestCoverageVerification
