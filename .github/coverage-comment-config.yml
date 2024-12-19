@@ -1,0 +1,10 @@
+﻿threshold:
+  total: 60 # 전체 커버리지 60% 이상이 되지 않으면 실패
+  changes: 50 # 변경된 코드 기준 50% 이상 커버리지 필요
+
+checks:
+  - name: Total Coverage
+    threshold: 60
+  - name: Diff Coverage
+    threshold: 50
+fail-on-error: true
