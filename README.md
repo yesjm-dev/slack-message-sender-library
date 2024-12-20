@@ -81,6 +81,8 @@ SlackPayload payload = SlackPayload.builder()
 
 slackService.sendSlackMessage(webhookUrl, payload);
 ```
+![sample](https://github.com/user-attachments/assets/e1683a20-a8d9-46cb-9145-eebb7ff1cd02)
+
 ---
 ## 라이선스
 이 프로젝트는 MIT License 하에 배포됩니다. 자세한 내용은 LICENSE 파일을 참조하세요.
