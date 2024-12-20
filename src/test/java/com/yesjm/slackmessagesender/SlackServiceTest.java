@@ -28,13 +28,17 @@ public class SlackServiceTest {
     void 슬랙메시지_전송_성공() throws Exception {
         // given
         String url = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
-        Payload payload = mock(Payload.class);
-
+        SlackPayload slackPayload = SlackPayload.builder()
+                .addSection(Section.builder()
+                        .text("test message")
+                        .build())
+                .build();
+        Payload payload = slackPayload.toPayload();
+        when(webhookResponse.getCode()).thenReturn(200);
         when(slack.send(eq(url), eq(payload))).thenReturn(webhookResponse);
-        doReturn(200).when(webhookResponse).getCode();
 
         // when
-        slackService.sendSlackMessage(url, payload);
+        slackService.sendSlackMessage(url, slackPayload);
 
         // then
         verify(slack, times(1)).send(eq(url), eq(payload));
@@ -45,8 +49,12 @@ public class SlackServiceTest {
     void 슬랙메시지_전송_실패_응답코드_200이_아니면_RuntimeException() throws Exception {
         // given
         String url = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
-        Payload payload = mock(Payload.class);
-
+        SlackPayload slackPayload = SlackPayload.builder()
+                .addSection(Section.builder()
+                        .text("test message")
+                        .build())
+                .build();
+        Payload payload = slackPayload.toPayload();
         when(slack.send(eq(url), eq(payload))).thenReturn(webhookResponse);
         when(webhookResponse.getCode()).thenReturn(500);
         when(webhookResponse.getBody()).thenReturn("Internal Server Error");
@@ -54,7 +62,7 @@ public class SlackServiceTest {
         // when & then
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> slackService.sendSlackMessage(url, payload)
+                () -> slackService.sendSlackMessage(url, slackPayload)
         );
         assertEquals("Failed to send Slack message. Response code: 500, Body: Internal Server Error", exception.getMessage());
     }
@@ -63,14 +71,18 @@ public class SlackServiceTest {
     void 슬랙메시지_전송_실패_IO_오류_발생하면_RuntimeException() throws Exception {
         // given
         String url = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
-        Payload payload = mock(Payload.class);
-
+        SlackPayload slackPayload = SlackPayload.builder()
+                .addSection(Section.builder()
+                        .text("test message")
+                        .build())
+                .build();
+        Payload payload = slackPayload.toPayload();
         when(slack.send(eq(url), eq(payload))).thenThrow(new IOException("Network error"));
 
         // when & then
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> slackService.sendSlackMessage(url, payload)
+                () -> slackService.sendSlackMessage(url, slackPayload)
         );
         assertEquals("Slack message failed due to an I/O error.", exception.getMessage());
     }

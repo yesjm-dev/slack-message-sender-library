@@ -7,28 +7,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SlackPayload {
+    private final List<LayoutBlock> blocks;
 
-    public static class Builder {
-        private List<LayoutBlock> blocks;
-
-        public Builder addSection(LayoutBlock block) {
-            if (this.blocks == null) {
-                this.blocks = new ArrayList<>();
-            }
-            this.blocks.add(block);
-            return this;
-        }
-
-        public Payload build() {
-            return Payload
-                    .builder()
-                    .blocks(blocks)
-                    .build();
-
-        }
+    private SlackPayload(List<LayoutBlock> blocks) {
+        this.blocks = blocks;
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    Payload toPayload() {
+        return Payload.builder()
+                .blocks(blocks)
+                .build();
+    }
+
+    public static class Builder {
+        private final List<LayoutBlock> blocks = new ArrayList<>();
+
+        public Builder addSection(LayoutBlock block) {
+            if (block == null) {
+                throw new IllegalArgumentException("LayoutBlock cannot be null");
+            }
+            blocks.add(block);
+            return this;
+        }
+
+        public SlackPayload build() {
+            return new SlackPayload(blocks);
+        }
     }
 }

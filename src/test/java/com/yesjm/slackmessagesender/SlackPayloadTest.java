@@ -19,7 +19,8 @@ public class SlackPayloadTest {
 
         // when
         builder.addSection(section);
-        Payload payload = builder.build();
+        SlackPayload slackPayload = builder.build();
+        Payload payload = slackPayload.toPayload();
 
         // then
         assertNotNull(payload);
@@ -38,7 +39,8 @@ public class SlackPayloadTest {
         builder.addSection(section);
         builder.addSection(section);
         builder.addSection(section);
-        Payload payload = builder.build();
+        SlackPayload slackPayload = builder.build();
+        Payload payload = slackPayload.toPayload();
 
         // then
         assertNotNull(payload);
