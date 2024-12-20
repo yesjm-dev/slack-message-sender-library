@@ -3,7 +3,7 @@
 ## 📜 프로젝트 개요
 
 **Slack Message Sender Library**는 Slack의 Webhook을 통해 다양한 형식의 메시지를 손쉽게 전송할 수 있도록 도와주는 라이브러리입니다.
-Slack의 `Block Kit` 을 쉽게 커스텀할 수 있도록 구성되어 있습니다.
+Slack의 [Block Kit](https://api.slack.com/block-kit) 을 쉽게 커스텀할 수 있도록 구성되어 있습니다.
 이 라이브러리를 사용하면 Slack 채널에 **텍스트**, **버튼**, **이미지** 등 다양한 형태의 메시지를 **자동화**하여 전송할 수 있습니다.
 
 개발자는 복잡한 Slack 메시지 형식을 신경 쓰지 않고 간편하게 메시지를 작성하고 전송할 수 있으며, 구성 요소들을 **유연하게 조합**하여 자신만의 메시지 형식을 쉽게 만들 수 있습니다.
@@ -30,10 +30,57 @@ Slack의 `Block Kit` 을 쉽게 커스텀할 수 있도록 구성되어 있습�
 ---
 
 ## 🚀 설치 방법
-- TODO
-## 사용 예시
+Gradle 사용하는 경우:
+```
+repositories {
+    maven("https://jitpack.io")
+}
+dependencies {
+    implementation 'com.yesjm:slack-message-sender-library:${tag}'
+}
+```
 
-- TODO
+Maven 사용하는 경우:
+```
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>com.yesjm</groupId>
+    <artifactId>slack-message-sender-library</artifactId>
+    <version>${tag}</version>
+</dependency>
+```
+## 💡Slack Webhook URL 설정
+슬랙에서 메시지를 보내기 위해서는 Incoming Webhook을 설정해야 합니다. 
+
+1. Slack에서 앱 추가:
+    - Slack에서 Incoming Webhooks 앱을 검색하여 추가합니다.
+2. Webhook URL 생성:
+    - Slack에서 채널을 선택하고, Webhook URL을 생성합니다. 생성된 URL은 Slack으로 메시지를 전송하는 데 사용됩니다.
+3. Webhook URL 복사:
+    - 생성된 Webhook URL을 복사하여 코드에서 사용할 수 있도록 설정합니다.
+
+## 🔧 사용 예시
+```
+SlackService slackService = new SlackService();
+String webhookUrl = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
+
+SlackPayload payload = SlackPayload.builder()
+        .addSection(
+            Section.builder()
+                .text("Test Message")
+                .button("https://example.com", "Click Me")
+                .build()
+        )
+        .build();
+
+slackService.sendSlackMessage(webhookUrl, payload);
+```
+---
 ## 라이선스
-
-- TODO
+이 프로젝트는 MIT License 하에 배포됩니다. 자세한 내용은 LICENSE 파일을 참조하세요.
