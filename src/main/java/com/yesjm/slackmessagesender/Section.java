@@ -24,6 +24,22 @@ import com.slack.api.model.block.element.BlockElement;
  * </pre>
  */
 public class Section {
+    private String text;
+    private BlockElement accessory;
+
+    private Section(String text, BlockElement accessory) {
+        this.text = text;
+        this.accessory = accessory;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public BlockElement getAccessory() {
+        return accessory;
+    }
+
     public static class Builder {
         private String text;
         private BlockElement accessory;
@@ -59,18 +75,22 @@ public class Section {
             return this;
         }
 
-        public SectionBlock build() {
+        public Section build() {
             if (this.text == null || this.text.isEmpty()) {
                 throw new IllegalArgumentException("Text must be set before building the section.");
             }
-            return Blocks.section(it ->
-                    it.text(BlockCompositions.markdownText(this.text))
-                            .accessory(this.accessory)
-            );
+            return new Section(this.text, this.accessory);
         }
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public SectionBlock toSectionBlock() {
+        return Blocks.section(it ->
+                it.text(BlockCompositions.markdownText(this.text))
+                        .accessory(this.accessory)
+        );
     }
 }

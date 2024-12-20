@@ -1,6 +1,5 @@
 package com.yesjm.slackmessagesender;
 
-import com.slack.api.model.block.SectionBlock;
 import com.slack.api.webhook.Payload;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ public class SlackPayloadTest {
     void 섹션을_하나_추가하면_블록에_하나의_섹션이_추가된다() {
         // given
         SlackPayload.Builder builder = SlackPayload.builder();
-        SectionBlock section = Section.builder()
+        Section section = Section.builder()
                 .text("text")
                 .build();
 
@@ -31,7 +30,7 @@ public class SlackPayloadTest {
     void 여러_섹션을_추가하면_블록에_모든_섹션이_추가된다() {
         // given
         SlackPayload.Builder builder = SlackPayload.builder();
-        SectionBlock section = Section.builder()
+        Section section = Section.builder()
                 .text("text")
                 .build();
 
