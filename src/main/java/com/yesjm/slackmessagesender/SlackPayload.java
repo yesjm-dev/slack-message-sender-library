@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SlackPayload {
-    private final List<LayoutBlock> blocks;
+    private List<LayoutBlock> blocks;
 
     private SlackPayload(List<LayoutBlock> blocks) {
         this.blocks = blocks;
@@ -26,11 +26,11 @@ public class SlackPayload {
     public static class Builder {
         private final List<LayoutBlock> blocks = new ArrayList<>();
 
-        public Builder addSection(LayoutBlock block) {
-            if (block == null) {
-                throw new IllegalArgumentException("LayoutBlock cannot be null");
+        public Builder addSection(Section section) {
+            if (section == null) {
+                throw new IllegalArgumentException("Section cannot be null");
             }
-            blocks.add(block);
+            blocks.add(section.toSectionBlock());
             return this;
         }
 

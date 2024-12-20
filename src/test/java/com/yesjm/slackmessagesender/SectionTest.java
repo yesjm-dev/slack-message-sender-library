@@ -1,6 +1,5 @@
 package com.yesjm.slackmessagesender;
 
-import com.slack.api.model.block.SectionBlock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,11 +24,11 @@ public class SectionTest {
         String text = "This is a section text.";
 
         // when
-        SectionBlock section = Section.builder().text(text).build();
+        Section section = Section.builder().text(text).build();
 
         // then
         assertNotNull(section);
-        assertEquals(text, section.getText().getText());
+        assertEquals(text, section.getText());
     }
 
     @Test
@@ -40,14 +39,14 @@ public class SectionTest {
         String buttonText = "Click Me";
 
         // when
-        SectionBlock section = Section.builder()
+        Section section = Section.builder()
                 .text(text)
                 .button(buttonUrl, buttonText)
                 .build();
 
         // then
         assertNotNull(section);
-        assertEquals(text, section.getText().getText());
+        assertEquals(text, section.getText());
         assertNotNull(section.getAccessory());
     }
 
@@ -59,14 +58,14 @@ public class SectionTest {
         String altText = "Example Image";
 
         // when
-        SectionBlock section = Section.builder()
+        Section section = Section.builder()
                 .text(text)
                 .image(imageUrl, altText)
                 .build();
 
         // then
         assertNotNull(section);
-        assertEquals(text, section.getText().getText());
+        assertEquals(text, section.getText());
         assertNotNull(section.getAccessory());
     }
 
