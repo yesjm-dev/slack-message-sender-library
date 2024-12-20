@@ -1,7 +1,6 @@
 package com.yesjm.slackmessagesender;
 
 import com.slack.api.Slack;
-import com.slack.api.webhook.Payload;
 import com.slack.api.webhook.WebhookResponse;
 import java.io.IOException;
 
@@ -21,11 +20,11 @@ public class SlackService {
      * Sends a message to Slack using the provided webhook URL and payload.
      *
      * @param url     The Slack webhook URL.
-     * @param payload The payload containing the message to send.
+     * @param slackPayload The payload containing the message to send.
      */
-    public void sendSlackMessage(String url, Payload payload) {
+    public void sendSlackMessage(String url, SlackPayload slackPayload) {
         try {
-            WebhookResponse response = slack.send(url, payload);
+            WebhookResponse response = slack.send(url, slackPayload.toPayload());
 
             if (response.getCode() != 200) {
                 throw new RuntimeException("Failed to send Slack message. Response code: "
