@@ -16,8 +16,7 @@ public class SlackClientTest {
         doNothing().when(SlackClient.class);
         SlackClient.postToSlack(anyString(), anyString());
 
-        SlackMessageSender sender = new CustomSlackMessageSender() {
-            @Override
+        SlackMessageSender sender = new SlackMessageSender() {
             protected String createPayload() {
                 return new SlackPayloadBuilder()
                         .addComponent(new TextSection("Hello Slack!"))
