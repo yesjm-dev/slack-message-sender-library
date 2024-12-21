@@ -7,8 +7,14 @@ public class ImageSection implements SlackSectionComponent {
 
 
     public ImageSection(String text, String imageUrl, String altText) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("text cannot be null or empty");
+        }
         if (imageUrl == null || imageUrl.isEmpty()) {
             throw new IllegalArgumentException("imageUrl cannot be null or empty");
+        }
+        if (altText == null || altText.isEmpty()) {
+            throw new IllegalArgumentException("altText cannot be null or empty");
         }
         this.text = text;
         this.imageUrl = imageUrl;

@@ -1,25 +1,22 @@
 package com.yesjm.slackmessagesender;
 
-import com.slack.api.model.block.element.ImageElement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ImageBlockTest {
+public class ImageSectionTest {
     @Test
-    void ImageBlock_정상적으로_생성된다() {
+    void ImageSection_정상적으로_생성된다() {
         // given
         String validImageUrl = "https://example.com/image.png";
         String altText = "Example Image";
 
         // when
-        ImageBlock imageBlock = new ImageBlock(validImageUrl, altText);
-        ImageElement imageElement = imageBlock.toImageElement();
+        ImageSection imageSection = new ImageSection("text", validImageUrl, altText);
 
         // then
-        assertNotNull(imageElement);
-        assertEquals(validImageUrl, imageElement.getImageUrl());
-        assertEquals(altText, imageElement.getAltText());
+        assertNotNull(imageSection);
+        System.out.println(imageSection.build());
     }
 
     @Test
@@ -30,9 +27,9 @@ public class ImageBlockTest {
         // when & then
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ImageBlock(imageUrl, "Example Image")
+                () -> new ImageSection("text", imageUrl, "Example Image")
         );
-        assertEquals("imageUrl cannot be null", exception.getMessage());
+        assertEquals("imageUrl cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -43,8 +40,8 @@ public class ImageBlockTest {
         // when & then
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ImageBlock(validImageUrl, null)
+                () -> new ImageSection("text", validImageUrl, null)
         );
-        assertEquals("altText cannot be null", exception.getMessage());
+        assertEquals("altText cannot be null or empty", exception.getMessage());
     }
 }

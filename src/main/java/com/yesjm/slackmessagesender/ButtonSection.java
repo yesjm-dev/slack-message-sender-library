@@ -8,11 +8,14 @@ public class ButtonSection implements SlackSectionComponent {
     private final String text;
 
     public ButtonSection(String text, String buttonUrl, String buttonText) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("text cannot be null or empty");
+        }
         if (!isValidUrl(buttonUrl)) {
             throw new IllegalArgumentException("Invalid URL: " + buttonUrl);
         }
         if (buttonText == null || buttonText.isEmpty()) {
-            throw new IllegalArgumentException("Button text cannot be null or empty");
+            throw new IllegalArgumentException("buttonText cannot be null or empty");
         }
         this.text = text;
         this.buttonUrl = buttonUrl;
